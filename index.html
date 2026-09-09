@@ -175,7 +175,7 @@
 
   <div class="ash-map-wrap">
     <div class="ash-map-title">🌋 PETA SEBARAN ABU VULKANIK — Gunung Anak Krakatau (Level III Siaga)</div>
-    <div class="ash-map-sub">Peta kiri: skematik posisi kota Anda relatif terhadap gunung &amp; arah sebaran (bukan peta geografis presisi). Peta kanan: citra satelit resmi BMKG (live).</div>
+    <div class="ash-map-sub">Peta kiri: skematik posisi kota Anda relatif terhadap gunung &amp; arah sebaran, berdasarkan narasi analisis manual (lihat tanggal tinjauan di badge tiap kota). Peta kanan: citra satelit resmi BMKG (live, update otomatis mengikuti jadwal BMKG). Kedua panel sengaja punya ritme update berbeda — jika tanggalnya tidak sama, itu normal; jadikan citra sebagai acuan paling baru.</div>
     <div class="ash-map-grid">
       <div class="ash-map-card">
         <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
@@ -281,12 +281,13 @@ const KARHUTLA = [
 const KARHUTLA_DATE = "4 September 2026 (data SiPongi/Databoks terbaru yang tersedia — bukan live)";
 
 /* Static fallback values = last known snapshot (9 Sep 2026), used if live fetch fails */
+const ASH_ANALYSIS_DATE = "8 September 2026, 04.00 WIB";
 const CITIES = [
 {
   id:"palembang", name:"PALEMBANG", lat:-2.9761, lon:104.7754, iqCity:"Palembang", iqState:"South Sumatra",
   fallback:{aqi:218, pm:"143,1", temp:25, hum:"82%", wind:"8 km/jam", dir:"—", cond:"Cerah Berawan"},
   karhutlaLink:{status:"terkait", text:"YA, terkait karhutla. SiPongi Kemenhut mencatat Sumatera Selatan sebagai provinsi dengan titik panas terbanyak ke-3 nasional (1.624 titik, data 4 Sep 2026) — konsisten dengan kategori Sangat Tidak Sehat dan PM2.5 sangat tinggi di Palembang."},
-  ash:{status:"tidak", text:"TIDAK terdampak. Update BMKG citra Sebaran Abu Vulkanik &amp; VAAC Darwin (8 Sep 04.00 WIB) menunjukkan abu Gunung Anak Krakatau (Level III Siaga) bergerak ke selatan-barat daya menuju Samudra Hindia, mencakup Banten/Lampung/Bengkulu/sebagian Jabar-DKI — Sumatera Selatan tidak termasuk area sebaran."},
+  ash:{status:"tidak", text:"TIDAK terdampak. Menurut analisis BMKG &amp; VAAC Darwin terakhir yang ditinjau, abu Gunung Anak Krakatau (Level III Siaga) bergerak ke selatan-barat daya menuju Samudra Hindia, mencakup Banten/Lampung/Bengkulu/sebagian Jabar-DKI — Sumatera Selatan tidak termasuk area sebaran."},
   info:[
     "Kualitas udara Palembang secara historis dominan Tidak Sehat–Sangat Tidak Sehat pada periode karhutla musim kemarau 2026.",
     "Kontributor utama: asap karhutla di Sumatera Selatan, provinsi dengan titik panas terbanyak ke-3 nasional per data SiPongi terkini."
@@ -297,7 +298,7 @@ const CITIES = [
   id:"pekanbaru", name:"PEKANBARU", lat:0.5071, lon:101.4478, iqCity:"Pekanbaru", iqState:"Riau",
   fallback:{aqi:170, pm:"83,3", temp:26, hum:"80%", wind:"3 km/jam", dir:"—", cond:"Berawan"},
   karhutlaLink:{status:"sebagian", text:"SEBAGIAN terkait karhutla. Riau tidak masuk 10 provinsi dengan titik panas terbanyak per SiPongi 4 Sep 2026, namun BMKG tetap menetapkan Riau sebagai provinsi prioritas risiko karhutla musim ini — kabut asap yang terasa kemungkinan besar juga bercampur asap kiriman dari Sumsel/Jambi."},
-  ash:{status:"tidak", text:"TIDAK terdampak. Sebaran abu Anak Krakatau (BMKG/VAAC Darwin, update 8 Sep 04.00 WIB) bergerak ke selatan-barat daya menuju Samudra Hindia; Riau tidak termasuk area sebaran yang teridentifikasi. Kabut yang terasa di Pekanbaru berasal dari karhutla, bukan abu vulkanik."},
+  ash:{status:"tidak", text:"TIDAK terdampak. Menurut analisis BMKG/VAAC Darwin terakhir yang ditinjau, sebaran abu Anak Krakatau bergerak ke selatan-barat daya menuju Samudra Hindia; Riau tidak termasuk area sebaran yang teridentifikasi. Kabut yang terasa di Pekanbaru berasal dari karhutla, bukan abu vulkanik."},
   info:[
     "Riau termasuk provinsi risiko tinggi karhutla musim kemarau 2026 menurut BMKG, bersama Sumsel, Jambi, Kalbar dan Kalteng.",
     "BMKG menetapkan Juli–September 2026 sebagai periode risiko karhutla paling kritis di Riau."
@@ -308,7 +309,7 @@ const CITIES = [
   id:"jakarta", name:"JAKARTA", lat:-6.2088, lon:106.8456, iqCity:"Jakarta", iqState:"Jakarta",
   fallback:{aqi:165, pm:"75,6", temp:32, hum:"46%", wind:"25 km/jam", dir:"Utara", cond:"Cerah"},
   karhutlaLink:{status:"tidak", text:"TIDAK terkait karhutla lokal. DKI Jakarta tidak termasuk provinsi manapun dalam 10 besar titik panas SiPongi. Kontributor utama diperkirakan emisi kendaraan/industri perkotaan."},
-  ash:{status:"sebagian", text:"RIWAYAT TERDAMPAK. Sejak erupsi Anak Krakatau 4-6 September, abu sempat tercatat mencapai sebagian DKI Jakarta (klaster hingga 20.000 kaki). Update BMKG/VAAC Darwin 8 Sep 04.00 WIB menunjukkan sebaran turun ke ~6.000 kaki dan bergerak menjauh ke barat daya — risiko hari ini menurun, tapi tetap perlu dipantau karena arah bisa berubah mengikuti angin."},
+  ash:{status:"sebagian", text:"RIWAYAT TERDAMPAK. Sejak erupsi Anak Krakatau 4-6 September, abu sempat tercatat mencapai sebagian DKI Jakarta (klaster hingga 20.000 kaki). Analisis BMKG/VAAC Darwin terakhir yang ditinjau menunjukkan sebaran turun ke ~6.000 kaki dan bergerak menjauh ke barat daya — risiko cenderung menurun, tapi tetap perlu dipantau karena arah bisa berubah mengikuti angin."},
   info:[
     "DKI Jakarta bukan wilayah prioritas karhutla; polusi lebih dipengaruhi emisi kendaraan/industri dan sesekali asap regional yang terbawa angin.",
     "IQAir pernah mencatat peringatan kualitas udara lintas-batas (transboundary) Asia Tenggara pada periode ini."
@@ -319,7 +320,7 @@ const CITIES = [
   id:"cikarang", name:"CIKARANG", lat:-6.2383, lon:107.1425, iqCity:"Cikarang", iqState:"West Java",
   fallback:{aqi:145, pm:"66,0", temp:34, hum:"55%", wind:"12 km/jam", dir:"Selatan", cond:"Cerah"},
   karhutlaLink:{status:"tidak", text:"TIDAK terkait karhutla. Jawa Barat tidak tercatat dalam 10 besar titik panas SiPongi. Kualitas udara di Cikarang lebih mencerminkan emisi industri/kendaraan kawasan padat."},
-  ash:{status:"sebagian", text:"RIWAYAT TERDAMPAK. Jawa Barat tercatat terdampak sebaran abu Anak Krakatau pada 4-6 September (klaster hingga 20.000 kaki). Update 8 Sep 04.00 WIB menunjukkan sebaran sudah turun ketinggian dan bergerak menjauh ke barat daya-Samudra Hindia, menjauhi Jabar — risiko hari ini menurun."},
+  ash:{status:"sebagian", text:"RIWAYAT TERDAMPAK. Jawa Barat tercatat terdampak sebaran abu Anak Krakatau pada 4-6 September (klaster hingga 20.000 kaki). Analisis terakhir yang ditinjau menunjukkan sebaran sudah turun ketinggian dan bergerak menjauh ke barat daya-Samudra Hindia, menjauhi Jabar — risiko cenderung menurun."},
   info:[
     "Jawa Barat bukan wilayah prioritas karhutla nasional.",
     "Kepadatan industri dan lalu lintas kawasan Cikarang-Bekasi diperkirakan menjadi kontributor utama."
@@ -375,6 +376,7 @@ function recText(level){
     "Tutup jendela &amp; pintu untuk menghindari udara luar yang kotor",
     "Gunakan masker N95/KN95 saat di luar ruangan",
     "Nyalakan alat pemurni udara bila tersedia",
+    "Mitigasi risiko dampak kesehatan akibat paparan asap karhutla: Masker N95/KN95, Air purifier, Set tabung oksigen portable (tabung, troli, regulator, selang oksigen)",
     "Jika mengalami keluhan kesehatan, segera ke faskes terdekat"
   ];
   if (level === "sedang") return [
@@ -494,6 +496,7 @@ function renderPanels(){
             <div>
               <div class="txt-head">SEBARAN ABU VULKANIK (BMKG Satelit &amp; VAAC Darwin)</div>
               <div class="txt-body">${c.ash.text}</div>
+              <div class="txt-body" style="margin-top:6px;font-size:10.5px;color:var(--muted);">ℹ️ Citra satelit di peta bawah update otomatis mengikuti jadwal BMKG (bisa berubah tanggal kapan saja). Narasi analisis di atas ditinjau manual secara berkala (terakhir: <b>${ASH_ANALYSIS_DATE}</b>) — keduanya <u>sengaja</u> punya ritme update berbeda, jadi tanggal boleh saja tidak sama; itu bukan galat. Untuk kondisi paling baru, jadikan citra sebagai acuan utama.</div>
             </div>
           </div>
           <ol>${c.info.map(t=>`<li>${t}</li>`).join('')}</ol>
