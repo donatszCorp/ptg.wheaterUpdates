@@ -125,16 +125,10 @@
   .ash-map-wrap{padding:0 24px 20px 24px;}
   .ash-map-title{font-size:15px;font-weight:800;color:var(--navy-dark);margin-bottom:4px;}
   .ash-map-sub{font-size:11.5px;color:var(--muted);margin-bottom:12px;}
-  .ash-map-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;}
-  .ash-map-card{background:#fff;border:1px solid #e2e8f4;border-radius:10px;padding:14px;}
-  .ash-map-legend{display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--ink);flex-wrap:wrap;}
-  .ash-map-legend span{display:inline-flex;align-items:center;gap:5px;}
-  .ash-map-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
   .sat-card{background:#fff;border:1px solid #e2e8f4;border-radius:10px;padding:14px;display:flex;flex-direction:column;}
   .sat-card img{width:100%;border-radius:8px;border:1px solid #dbe4f5;background:#eef2f9;}
   .sat-caption{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.5;}
   .sat-fallback{font-size:11.5px;color:var(--muted);padding:24px 10px;text-align:center;background:#eef2f9;border-radius:8px;}
-  @media(max-width:860px){.ash-map-grid{grid-template-columns:1fr;}}
   .karhutla-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
   .kh-card{background:#fff4e5;border:1px solid #f0ddb8;border-radius:8px;padding:10px 12px;text-align:center;}
   .kh-card .n{font-size:20px;font-weight:900;color:var(--red-dark);}
@@ -174,49 +168,14 @@
   </div>
 
   <div class="ash-map-wrap">
-    <div class="ash-map-title">🌋 PETA SEBARAN ABU VULKANIK — Gunung Anak Krakatau (Level III Siaga)</div>
-    <div class="ash-map-sub">Peta kiri: skematik posisi kota Anda relatif terhadap gunung &amp; arah sebaran, berdasarkan narasi analisis manual (lihat tanggal tinjauan di badge tiap kota). Peta kanan: citra satelit resmi BMKG (live, update otomatis mengikuti jadwal BMKG). Kedua panel sengaja punya ritme update berbeda — jika tanggalnya tidak sama, itu normal; jadikan citra sebagai acuan paling baru.</div>
-    <div class="ash-map-grid">
-      <div class="ash-map-card">
-        <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-          <rect x="0" y="0" width="700" height="420" fill="#dceafc"/>
-          <!-- simplified landmasses -->
-          <path d="M40,120 L220,90 L340,150 L300,200 L160,190 L60,170 Z" fill="#cfe3c4" stroke="#a9c79a" stroke-width="1"/>
-          <text x="120" y="140" font-size="13" fill="#4a6b3a" font-weight="700">SUMATERA</text>
-          <path d="M260,230 L520,235 L560,260 L520,285 L260,280 Z" fill="#cfe3c4" stroke="#a9c79a" stroke-width="1"/>
-          <text x="360" y="262" font-size="13" fill="#4a6b3a" font-weight="700">JAWA</text>
-          <path d="M520,110 L650,100 L660,170 L560,190 L520,150 Z" fill="#cfe3c4" stroke="#a9c79a" stroke-width="1"/>
-          <text x="545" y="145" font-size="12" fill="#4a6b3a" font-weight="700">KALIMANTAN</text>
-          <text x="60" y="330" font-size="12" fill="#5c8ac9" font-style="italic">Samudra Hindia</text>
-
-          <!-- ash plume: historical (light) + current (darker), moving south-southwest -->
-          <ellipse cx="270" cy="255" rx="150" ry="70" fill="#f0a860" opacity="0.28" transform="rotate(20 270 255)"/>
-          <ellipse cx="230" cy="290" rx="90" ry="45" fill="#e0342c" opacity="0.30" transform="rotate(25 230 290)"/>
-          <text x="120" y="360" font-size="10.5" fill="#8a4a10" font-weight="700">Sebaran historis 4–6 Sep (Jabar/DKI/Banten)</text>
-          <text x="115" y="374" font-size="10.5" fill="#8a1a10" font-weight="700">Sebaran terkini 8 Sep → Samudra Hindia</text>
-
-          <!-- volcano icon: Anak Krakatau at Selat Sunda -->
-          <path d="M255,235 L268,205 L281,235 Z" fill="#7a3b1e" stroke="#4a2410" stroke-width="1"/>
-          <circle cx="268" cy="207" r="3.5" fill="#e0342c"/>
-          <text x="230" y="200" font-size="11" fill="#7a1a10" font-weight="800">Anak Krakatau</text>
-
-          <!-- city markers, positions are illustrative -->
-          <g id="ash-map-markers"></g>
-
-          <text x="10" y="410" font-size="9" fill="#8a99b8">Peta ilustratif — bukan skala/geografi presisi</text>
-        </svg>
-        <div class="ash-map-legend">
-          <span><span class="dot" style="background:#e0342c;"></span> Riwayat terdampak abu vulkanik</span>
-          <span><span class="dot" style="background:#3aa634;"></span> Tidak terdampak</span>
-        </div>
-      </div>
-      <div class="sat-card">
-        <img src="https://inderaja.bmkg.go.id/Trajektori/Anak_Krakatau.png"
-             alt="Citra Sebaran Abu Vulkanik - BMKG"
-             onerror="this.style.display='none'; document.getElementById('sat-fallback').style.display='block';">
-        <div class="sat-fallback" id="sat-fallback" style="display:none;">Citra satelit BMKG tidak berhasil dimuat di browser ini (kemungkinan diblokir hotlink-protection). Lihat langsung di bmkg.go.id/cuaca/satelit/citra-sebaran-abu-vulkanik</div>
-        <div class="sat-caption">Sumber: BMKG — Citra Sebaran Abu Vulkanik (Himawari-9 + VAAC Darwin). Gambar dimuat langsung dari server BMKG dan mengikuti jadwal update mereka; wajib mencantumkan BMKG sebagai sumber sesuai ketentuan penggunaan citra satelit BMKG.</div>
-      </div>
+    <div class="ash-map-title">🌋 CITRA SEBARAN ABU VULKANIK — Gunung Anak Krakatau (Level III Siaga)</div>
+    <div class="ash-map-sub">Citra satelit resmi BMKG (Himawari-9 + VAAC Darwin) — live, update otomatis mengikuti jadwal BMKG.</div>
+    <div class="sat-card" style="max-width:640px;">
+      <img src="https://inderaja.bmkg.go.id/Trajektori/Anak_Krakatau.png"
+           alt="Citra Sebaran Abu Vulkanik - BMKG"
+           onerror="this.style.display='none'; document.getElementById('sat-fallback').style.display='block';">
+      <div class="sat-fallback" id="sat-fallback" style="display:none;">Citra satelit BMKG tidak berhasil dimuat di browser ini (kemungkinan diblokir hotlink-protection). Lihat langsung di bmkg.go.id/cuaca/satelit/citra-sebaran-abu-vulkanik</div>
+      <div class="sat-caption">Sumber: BMKG — Citra Sebaran Abu Vulkanik (Himawari-9 + VAAC Darwin). Gambar dimuat langsung dari server BMKG dan mengikuti jadwal update mereka; wajib mencantumkan BMKG sebagai sumber sesuai ketentuan penggunaan citra satelit BMKG.</div>
     </div>
   </div>
 
@@ -419,27 +378,6 @@ function renderKarhutla(){
   `).join('') + `<div class="footnote" style="grid-column:1/-1;">${KARHUTLA_DATE}</div>`;
 }
 
-const ASH_MAP_COORDS = {
-  medan:{x:90,y:112}, pekanbaru:{x:172,y:135}, palembang:{x:268,y:178},
-  jakarta:{x:288,y:243}, cikarang:{x:322,y:247}, semarang:{x:405,y:255},
-  surabaya:{x:500,y:258}, bontang:{x:598,y:140}
-};
-function renderAshMap(){
-  const g = document.getElementById('ash-map-markers');
-  if(!g) return;
-  g.innerHTML = CITIES.map(c=>{
-    const p = ASH_MAP_COORDS[c.id];
-    if(!p) return '';
-    const impacted = (c.ash.status === 'terkait' || c.ash.status === 'sebagian');
-    const color = impacted ? '#e0342c' : '#3aa634';
-    const labelX = p.x + 8;
-    return `
-      <circle cx="${p.x}" cy="${p.y}" r="6" fill="${color}" stroke="#fff" stroke-width="1.5"/>
-      <text x="${labelX}" y="${p.y+4}" font-size="10.5" fill="#12213f" font-weight="700">${c.name}</text>
-    `;
-  }).join('');
-}
-
 function renderPanels(){
   document.getElementById('panels').innerHTML = CITIES.map((c,i)=>`
     <div class="panel ${i===0?'active':''}" id="panel-${c.id}">
@@ -491,16 +429,8 @@ function renderPanels(){
               <div class="txt-body">${c.karhutlaLink.text}</div>
             </div>
           </div>
-          <div class="karhutla-badge ${c.ash.status}">
-            <div class="icon">${c.ash.status==='terkait'?'🌋':(c.ash.status==='sebagian'?'⚠️':'✅')}</div>
-            <div>
-              <div class="txt-head">SEBARAN ABU VULKANIK (BMKG Satelit &amp; VAAC Darwin)</div>
-              <div class="txt-body">${c.ash.text}</div>
-              <div class="txt-body" style="margin-top:6px;font-size:10.5px;color:var(--muted);">ℹ️ Citra satelit di peta bawah update otomatis mengikuti jadwal BMKG (bisa berubah tanggal kapan saja). Narasi analisis di atas ditinjau manual secara berkala (terakhir: <b>${ASH_ANALYSIS_DATE}</b>) — keduanya <u>sengaja</u> punya ritme update berbeda, jadi tanggal boleh saja tidak sama; itu bukan galat. Untuk kondisi paling baru, jadikan citra sebagai acuan utama.</div>
-            </div>
-          </div>
           <ol>${c.info.map(t=>`<li>${t}</li>`).join('')}</ol>
-          <div class="footnote">AQI &amp; cuaca: live saat halaman dibuka. Titik panas karhutla &amp; sebaran abu vulkanik: data terakhir yang tersedia (bukan live — lihat catatan di footer).</div>
+          <div class="footnote">AQI &amp; cuaca: live saat halaman dibuka. Titik panas karhutla: data terakhir yang tersedia (bukan live — lihat catatan di footer).</div>
         </div>
 
         <div class="card">
@@ -652,7 +582,6 @@ async function fetchAll(manual){
 renderThumbs();
 renderLegend();
 renderKarhutla();
-renderAshMap();
 renderPanels();
 fetchAll(false);
 </script>
